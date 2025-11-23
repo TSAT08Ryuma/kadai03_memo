@@ -206,11 +206,11 @@
             count_4prize = 0;
             count_5prize = 0;
             count_6prize = 0;
-            count_money_tousengaku = 0;
+            count_money_goukeigaku = 0;
             count_money_toushigaku = 0;
+            count_money_tousengaku = 0;
             document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
             document.getElementById("answer_tousengaku").textContent = count_money_tousengaku;
-            count_money_tousengaku = count_money_goukeigaku - count_money_toushigaku;
             document.getElementById("answer_goukeigaku").textContent = count_money_goukeigaku;
             document.getElementById("answer4").textContent = count_1prize;
             document.getElementById("answer5").textContent = count_2prize;
@@ -219,7 +219,6 @@
             document.getElementById("answer8").textContent = count_5prize;
             document.getElementById("answer9").textContent = count_6prize;
             wrapper.innerHTML = '<p>【当選番号および当選結果】</p>';
-            // Line.destroy();
             Line2.destroy();
         }
     };
@@ -240,9 +239,9 @@
             count_6prize = 0;
             count_money_goukeigaku = 0;
             count_money_toushigaku = 0;
+            count_money_tousengaku = 0;
             document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
             document.getElementById("answer_tousengaku").textContent = count_money_tousengaku;
-            count_money_tousengaku = count_money_goukeigaku - count_money_toushigaku;
             document.getElementById("answer_goukeigaku").textContent = count_money_goukeigaku;
             document.getElementById("answer4").textContent = count_1prize;
             document.getElementById("answer5").textContent = count_2prize;
@@ -252,7 +251,6 @@
             document.getElementById("answer9").textContent = count_6prize;
             wrapper.innerHTML = '<p>【当選番号および当選結果】</p>';
             Line.destroy();
-            // Line2.destroy();
         }
     };
 
@@ -271,9 +269,9 @@
         count_6prize = 0;
         count_money_goukeigaku = 0;
         count_money_toushigaku = 0;
+        count_money_tousengaku = 0;
         document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
         document.getElementById("answer_tousengaku").textContent = count_money_tousengaku;
-        count_money_tousengaku = count_money_goukeigaku - count_money_toushigaku;
         document.getElementById("answer_goukeigaku").textContent = count_money_goukeigaku;
         document.getElementById("answer4").textContent = count_1prize;
         document.getElementById("answer5").textContent = count_2prize;
