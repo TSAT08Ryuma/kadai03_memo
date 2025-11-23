@@ -7,8 +7,8 @@
     let array01 = []; //array01は43の配列のうち0－5番目を取得
     let count_hit = 0; //count_hitは通常数字のヒットを判定
     let count_hit2 = 0; //count_hit2はボーナス数字のヒットを判定
-    let count_money_toushigaku = 0; //投資額
-    let count_money_tousengaku = 0;  //当選額-投資額
+    let count_money_toushigaku = 0;
+    let count_money_tousengaku = 0;
     let count_money_return = 0; //count_money_return = count_money_tousengaku - count_money_toushigaku
     let odds = 1;
     let times = 1;
@@ -153,7 +153,8 @@
                         beginAtZero: true
                     },
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.15)' },
                     }
                 }
             }
@@ -179,10 +180,14 @@
                         borderColor: 'rgba(75, 192, 192, 1)',
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     }
-                ]
+                ],
             },
+            options: {
+                scales:{
+                        y: {grid: { color: 'rgba(255,255,255,0.15)' }},
+                }
+            }
         });
-
     }
 
     //ボタン１を押したらグラフ２を完全削除
