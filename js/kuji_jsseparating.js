@@ -37,6 +37,12 @@
         // 昇順に変更するアロー関数
         array01 = [t0, t1, t2, t3, t4, t5];
         array01.sort((a, b) => a - b);
+        // 同じ数字を入れられたので警告
+        for (let n = 0; n < 5; n++){
+            if(array01[n] === array01[n+1]){
+                alert("同じ数字が入力されているため、当選確率が低下しています")
+            }
+        }
     }
 
     //シャッフルアルゴリズム
@@ -192,6 +198,11 @@
         });
     }
 
+
+    function bounu(){ 
+    }
+
+
     //ボタン１を押したらグラフ２を完全削除
     function reset_for_button1() {
         if (Line2) {
@@ -299,5 +310,43 @@
             Line = "";
         }
     }
+
+    // 変な数字入れるな！
+    function limit(){
+        let inputnumber0 = Number(document.getElementById("num0").value);
+        let inputnumber1 = Number(document.getElementById("num1").value);
+        let inputnumber2 = Number(document.getElementById("num2").value);
+        let inputnumber3 = Number(document.getElementById("num3").value);
+        let inputnumber4 = Number(document.getElementById("num4").value);
+        let inputnumber5 = Number(document.getElementById("num5").value);
+        let inputnumber6 = Number(document.getElementById("num6").value);
+        let inputnumber7 = Number(document.getElementById("num7").value);
+        if(inputnumber0 < 0 || inputnumber0 > 43 || !Number.isInteger(inputnumber0)){
+            document.getElementById("num0").value = 1 
+        }
+        if(inputnumber1 < 0 || inputnumber1 > 43 || !Number.isInteger(inputnumber1)){
+            document.getElementById("num1").value = 2 
+        }
+        if(inputnumber2 < 0 || inputnumber2 > 43 || !Number.isInteger(inputnumber2)){
+            document.getElementById("num2").value = 3 
+        }
+        if(inputnumber3 < 0 || inputnumber3 > 43 || !Number.isInteger(inputnumber3)){
+            document.getElementById("num3").value = 4
+        }
+        if(inputnumber4 < 0 || inputnumber4 > 43 || !Number.isInteger(inputnumber4)){
+            document.getElementById("num4").value = 5 
+        }
+        if(inputnumber5 < 0 || inputnumber5 > 43 || !Number.isInteger(inputnumber5)){
+            document.getElementById("num5").value = 6 
+        }
+        if(inputnumber6 < 0 || inputnumber6 > 10000 || !Number.isInteger(inputnumber6)){
+            document.getElementById("num6").value = 100
+        }
+        if(inputnumber7 < 0 || inputnumber7 > 10000 || !Number.isInteger(inputnumber7)){
+            document.getElementById("num7").value = 10000
+        }
+    }
+
+
 
     Chart.defaults.color = 'white'
