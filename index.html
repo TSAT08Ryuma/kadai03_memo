@@ -7,11 +7,15 @@
     <title>億万長者ゲーム</title>
 </head>
 <body>
+    <!-- 動画用に必要　背景黒 -->
+    <div id="all"></div>
+    <!-- タイトル部分 -->
     <div class="header">
         <div class="title1">
             <h1 class="title2">億万長者ゲーム</h1>
         </div>
     </div>
+    <!-- 上部のルール説明 -->
     <div class="rule">
         <div class="rule1">
             <p class="rule3">【ルール説明】</p>
@@ -28,6 +32,7 @@
             <p>・5等:3桁一致 0.3万ゴールド</p>
         </div>
     </div>
+    <!-- 中部の入力ゾーン -->
     <div class="input1">
         <p>くじ数字入力ゾーン</p>
         <input type="number" name="" id="num0" min="1" max="43" oninput="limit()" value="1">
@@ -40,19 +45,13 @@
         <input type="number" name="" value="100" id="num6" min="1" max="100">
         <p>掛け金と当選額 1-10000倍</p>
         <input type="number" name="" value="10000" id="num7" min="1" max="10000">
-
-        <!-- <input type="button" id="button0" value="ゲーム⓵" onclick="getValue0(); shuffle_check(); reset2()"></button>
-        <input type="button" id="button1" value="ゲーム⓶" onclick="reset(); getValue0(); shuffle_check(); reset3()"></button>
-        <input type="button" id="button2" value="リセット" onclick="reset(); reset2()"></button> -->
-
         <input type="button" id="button0" value="ゲーム⓵"
             onclick="reset_for_button1(); getValue0(); shuffle_check(); reset2()"></button>
         <input type="button" id="button1" value="ゲーム⓶"
             onclick="reset_for_button2(); reset_for_button2_β(); getValue0(); shuffle_check(); reset1()"></button>
         <input type="button" id="button2" value="リセット" onclick="reset_for_button1(); reset_for_button2()"></button>
-
-
     </div>
+    <!-- 下部の結果発表ゾーン -->
     <div>
         <p class="kekka3">【結果発表】</p>
         <div class="kekka">
@@ -85,8 +84,15 @@
     <p>copyrights 2025 Game Academy All Rights Reserved.</p>
 </footer>
 
+        <!-- 動画 -->
+        <!-- <div id="movie"> -->
+            <!-- <video src="movie/box.mp4" muted autoplay id="movie2"></video> -->
+            <!-- <video src="movie/prize4.mp4" muted autoplay id="movie3"></video>
+        </div> -->
 
 </body>
+
+
 
 
 </html>
