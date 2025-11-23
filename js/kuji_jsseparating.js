@@ -301,3 +301,5 @@
             Line = "";
         }
     }
+
+    Chart.defaults.color = 'white'

@@ -4,6 +4,7 @@ body{
     box-sizing: border-box;
     width: 80%;
     margin: 0 auto;
+    /* ボディ全体の色を綺麗にして幅をそろえる */
 }
 #all{
     background-color: black;
@@ -14,25 +15,31 @@ body{
     top: 0;
     left: 0;
     z-Index: -1;
+    /* 動画用 */
 }
 .header {
     position: relative;
     text-shadow: px 1px rgba(255, 215, 106, 0.7);
     color: #ffd76a;
     letter-spacing: 5px;
+    /* ヘッダーの文字を綺麗にした */
 }
-.img2 {
+/* .img2 {
     max-height: 100px;
     position: absolute
-}
+} */
 .title1 {
     width:100%;
     text-align: center;
     padding-top: 8px
+    /* ヘッダーの文字を綺麗にした */
 }
 .title2 {
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.23);
+    /* ヘッダーの文字を綺麗にした */
 }
+
+/* ルール記載エリア */
 .rule {
     margin:0 auto;
     width: 100%;
@@ -45,11 +52,12 @@ body{
     background-color: rgba(10, 12, 24, 0.9);
     border: 3px solid rgba(255, 215, 106, 0.3);
     border-radius: 20px;
-
 }
 .rule3 {
     font-weight: 1000;
 }
+
+/* インプットエリア */
 .input1{
     width: 100%;
     margin: 20px auto 0;
@@ -65,18 +73,20 @@ body{
 input{
     text-align: right;
 }
-#button0,#button2{
+#button0,#button1{
     text-shadow: rgba(255, 175, 70, 0.5);
     background-color: #ffd76a;
     border-radius: 10px;
 
 }
-#button1{
+#button2{
     text-shadow: rgba(58, 41, 18, 0.5);
     background-color: #8593cb;
     border-radius: 10px;
 
 }
+
+/* アウトプットエリア */
 .kekka3{
     text-align: center;
     font-size: 20px;
@@ -91,7 +101,7 @@ input{
 .kekka1
 {
     padding-left: 30px;
-    width: calc(100% - 732px);
+    width: calc(100% - 802px);
     background-color: rgba(10, 12, 24, 0.9);
     border: 3px solid rgba(255, 215, 106, 0.3);
     border-radius: 20px;
