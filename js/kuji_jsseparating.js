@@ -1,15 +1,15 @@
     let array07_graph = []; //グラフ2を書くために10の数字を格納する配列
     let array06_graph = []; //グラフ2を書くために数字を格納する配列
-    let array05_graph = [];
-    let array04_graph = [];
-    let array03 = [];
-    let array02 = []; //array02は43の配列のうち6番目のボーナス数字を取得
-    let array01 = []; //array01は43の配列のうち0－5番目を取得
+    let array05_graph = []; //グラフ1を作るための横軸用の空列
+    let array04_graph = []; //グラフ1を作るための数字の配列
+    let array03 = []; //array03は43の配列のうち6番目のボーナス数字を取得
+    let array02 = []; //array02は43の配列のうち0-5番目のボーナス数字を取得
+    let array01 = []; //array01は入力した値を取得する配列
     let count_hit = 0; //count_hitは通常数字のヒットを判定
     let count_hit2 = 0; //count_hit2はボーナス数字のヒットを判定
     let count_money_toushigaku = 0;
-    let count_money_tousengaku = 0;
-    let count_money_return = 0; //count_money_return = count_money_tousengaku - count_money_toushigaku
+    let count_money_goukeigaku = 0;
+    let count_money_tousengaku = 0; //count_money_tousengaku = count_money_goukeigaku - count_money_toushigaku
     let odds = 1;
     let times = 1;
     let count_1prize = 0;
@@ -52,7 +52,7 @@
             count_hit2 = 0;
             // 掛け金を倍率分増加
             count_money_toushigaku -= 200 * odds;
-            count_money_tousengaku -= 200 * odds;
+            count_money_goukeigaku -= 200 * odds;
             // 重複なしアルゴリズム
             var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
@@ -87,27 +87,27 @@
             }
             // ヒット数による当選判定
             if (count_hit === 6) {
-                count_money_tousengaku += 200000000 * odds;
+                count_money_goukeigaku += 200000000 * odds;
                 outcome = "１等賞";
                 count_1prize += 1;
             } else if (count_hit === 5 && count_hit2 === 1) {
-                count_money_tousengaku += 10000000 * odds;
+                count_money_goukeigaku += 10000000 * odds;
                 outcome = "２等賞";
                 count_2prize += 1;
             } else if (count_hit === 5) {
-                count_money_tousengaku += 300000 * odds;
+                count_money_goukeigaku += 300000 * odds;
                 outcome = "３等賞";
                 count_3prize += 1;
             } else if (count_hit === 4) {
-                count_money_tousengaku += 68000 * odds;
+                count_money_goukeigaku += 68000 * odds;
                 outcome = "４等賞";
                 count_4prize += 1;
             } else if (count_hit === 3) {
-                count_money_tousengaku += 1000 * odds;
+                count_money_goukeigaku += 1000 * odds;
                 outcome = "５等賞";
                 count_5prize += 1;
             } else {
-                count_money_tousengaku += 0;
+                count_money_goukeigaku += 0;
                 outcome = "はずれ";
                 count_6prize += 1;
             }
@@ -116,10 +116,10 @@
             // outcomeをリセット
             outcome = "";
             // 当選金額描写
-            document.getElementById("answer3").textContent = count_money_tousengaku;
+            document.getElementById("answer_goukeigaku").textContent = count_money_goukeigaku;
             document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
-            count_money_return = count_money_tousengaku - count_money_toushigaku;
-            document.getElementById("answer_tousengaku").textContent = count_money_return;
+            count_money_tousengaku = count_money_goukeigaku - count_money_toushigaku;
+            document.getElementById("answer_tousengaku").textContent = count_money_tousengaku;
             // 当選判定描写
             document.getElementById("answer4").textContent = count_1prize;
             document.getElementById("answer5").textContent = count_2prize;
@@ -127,11 +127,11 @@
             document.getElementById("answer7").textContent = count_4prize;
             document.getElementById("answer8").textContent = count_5prize;
             document.getElementById("answer9").textContent = count_6prize;
-            // アレイ4に当選金額
-            array04_graph.push(count_money_tousengaku);
+            // アレイ4に合計額を入れて、アレイ5はグラフ1用の空欄
+            array04_graph.push(count_money_goukeigaku);
             array05_graph.push("");
         }
-        // グラフ1描写JS
+        // アレイ4と5を活用したグラフ1描写JS
         if (Line) {
             Line.destroy();
         }
@@ -141,7 +141,7 @@
                 labels: array05_graph,
                 datasets: [
                     {
-                        label: '儲け額',
+                        label: '合計額',
                         data: array04_graph,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -161,12 +161,13 @@
             }
         });
 
-        // ローカルストレージに直近10データを格納しグラフ２の描写を行う
-        array06_graph.push(Number(document.getElementById("answer3").textContent))
+        // ローカルストレージに直近10データを格納
+        array06_graph.push(Number(document.getElementById("answer_goukeigaku").textContent))
         // let m = array06_graph.length
         array07_graph = array06_graph.slice(-10)
         localStorage.setItem("memo", array07_graph);
 
+        // グラフ2を描写
         if (Line2) {
             Line2.destroy();
         }
@@ -176,7 +177,7 @@
                 labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                 datasets: [
                     {
-                        label: '儲け額の推移',
+                        label: '合計額',
                         data: array07_graph,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -209,8 +210,8 @@
             count_money_toushigaku = 0;
             document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
             document.getElementById("answer_tousengaku").textContent = count_money_tousengaku;
-            count_money_return = count_money_tousengaku - count_money_toushigaku;
-            document.getElementById("answer3").textContent = count_money_return;
+            count_money_tousengaku = count_money_goukeigaku - count_money_toushigaku;
+            document.getElementById("answer_goukeigaku").textContent = count_money_goukeigaku;
             document.getElementById("answer4").textContent = count_1prize;
             document.getElementById("answer5").textContent = count_2prize;
             document.getElementById("answer6").textContent = count_3prize;
@@ -237,12 +238,12 @@
             count_4prize = 0;
             count_5prize = 0;
             count_6prize = 0;
-            count_money_tousengaku = 0;
+            count_money_goukeigaku = 0;
             count_money_toushigaku = 0;
             document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
             document.getElementById("answer_tousengaku").textContent = count_money_tousengaku;
-            count_money_return = count_money_tousengaku - count_money_toushigaku;
-            document.getElementById("answer3").textContent = count_money_return;
+            count_money_tousengaku = count_money_goukeigaku - count_money_toushigaku;
+            document.getElementById("answer_goukeigaku").textContent = count_money_goukeigaku;
             document.getElementById("answer4").textContent = count_1prize;
             document.getElementById("answer5").textContent = count_2prize;
             document.getElementById("answer6").textContent = count_3prize;
@@ -268,12 +269,12 @@
         count_4prize = 0;
         count_5prize = 0;
         count_6prize = 0;
-        count_money_tousengaku = 0;
+        count_money_goukeigaku = 0;
         count_money_toushigaku = 0;
         document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
         document.getElementById("answer_tousengaku").textContent = count_money_tousengaku;
-        count_money_return = count_money_tousengaku - count_money_toushigaku;
-        document.getElementById("answer3").textContent = count_money_return;
+        count_money_tousengaku = count_money_goukeigaku - count_money_toushigaku;
+        document.getElementById("answer_goukeigaku").textContent = count_money_goukeigaku;
         document.getElementById("answer4").textContent = count_1prize;
         document.getElementById("answer5").textContent = count_2prize;
         document.getElementById("answer6").textContent = count_3prize;
@@ -285,15 +286,12 @@
         // Line2.destroy();
     };
 
-    //配列２のグラフを削除している
+    //配列２のグラフを削除
     function reset2() {
         if (Line2) {
             Line2.destroy();
             Line2 = "";
         }
-        // localStorage.removeItem("memo");
-        // array07_graph = [];
-        // array06_graph = [];
     }
 
     //配列１のグラフを削除
