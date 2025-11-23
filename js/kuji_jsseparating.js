@@ -1,5 +1,5 @@
-    let array07_graph = [];
-    let array06_graph = [];
+    let array07_graph = []; //グラフ2を書くために10の数字を格納する配列
+    let array06_graph = []; //グラフ2を書くために数字を格納する配列
     let array05_graph = [];
     let array04_graph = [];
     let array03 = [];
@@ -127,6 +127,7 @@
             document.getElementById("answer7").textContent = count_4prize;
             document.getElementById("answer8").textContent = count_5prize;
             document.getElementById("answer9").textContent = count_6prize;
+            // アレイ4に当選金額
             array04_graph.push(count_money_tousengaku);
             array05_graph.push("");
         }
@@ -162,7 +163,7 @@
 
         // ローカルストレージに直近10データを格納しグラフ２の描写を行う
         array06_graph.push(Number(document.getElementById("answer3").textContent))
-        let m = array06_graph.length
+        // let m = array06_graph.length
         array07_graph = array06_graph.slice(-10)
         localStorage.setItem("memo", array07_graph);
 
@@ -175,7 +176,7 @@
                 labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
                 datasets: [
                     {
-                        label: '過去の儲け額の推移',
+                        label: '儲け額の推移',
                         data: array07_graph,
                         borderColor: 'rgba(75, 192, 192, 1)',
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
