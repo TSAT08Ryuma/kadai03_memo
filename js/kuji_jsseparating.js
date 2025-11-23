@@ -1,0 +1,299 @@
+    let array07_graph = [];
+    let array06_graph = [];
+    let array05_graph = [];
+    let array04_graph = [];
+    let array03 = [];
+    let array02 = []; //array02は43の配列のうち6番目のボーナス数字を取得
+    let array01 = []; //array01は43の配列のうち0－5番目を取得
+    let count_hit = 0; //count_hitは通常数字のヒットを判定
+    let count_hit2 = 0; //count_hit2はボーナス数字のヒットを判定
+    let count_money_toushigaku = 0; //投資額
+    let count_money_tousengaku = 0;  //当選額-投資額
+    let count_money_return = 0; //count_money_return = count_money_tousengaku - count_money_toushigaku
+    let odds = 1;
+    let times = 1;
+    let count_1prize = 0;
+    let count_2prize = 0;
+    let count_3prize = 0;
+    let count_4prize = 0;
+    let count_5prize = 0;
+    let count_6prize = 0;
+    const wrapper = document.getElementById('AAA'); //ID名AAのオブジェクトへの操作用
+    let outcome = "";
+    let ctx = document.getElementById('myChart_line');
+    let Line = "";
+    let Line2 = "";
+    let ctx2 = document.getElementById('myChart_bar');
+
+    //シャッフルアルゴリズム
+    function getValue0() {
+        // くじ数字を変数に入力
+        const t0 = Number(document.getElementById("num0").value);
+        const t1 = Number(document.getElementById("num1").value);
+        const t2 = Number(document.getElementById("num2").value);
+        const t3 = Number(document.getElementById("num3").value);
+        const t4 = Number(document.getElementById("num4").value);
+        const t5 = Number(document.getElementById("num5").value);
+        // 昇順に変更するアロー関数
+        array01 = [t0, t1, t2, t3, t4, t5];
+        array01.sort((a, b) => a - b);
+    }
+
+    //シャッフルアルゴリズム
+    function shuffle_check() {
+        //試行回数を取得 
+        times = Number(document.getElementById("num6").value);
+        // 試行回数分試行
+        for (let n = 0; n < times; n++) {
+            // 倍率を取得
+            odds = Number(document.getElementById("num7").value);
+            // 判定数のカウントを0にリセット、各回毎に当選判定
+            count_hit = 0;
+            count_hit2 = 0;
+            // 掛け金を倍率分増加
+            count_money_toushigaku -= 200 * odds;
+            count_money_tousengaku -= 200 * odds;
+            // 重複なしアルゴリズム
+            var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+                31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+                41, 42, 43];
+            var a = arr.length;
+            while (a) {
+                var j = Math.floor(Math.random() * a);
+                var t = arr[--a];
+                arr[a] = arr[j];
+                arr[j] = t;
+            }
+            // 最初の６つを取得
+            array02 = arr.slice(0, 6);
+            array02.sort(function (a, b) {
+                return a - b;
+            });
+            // ７つ目を取得
+            array03 = arr.slice(6, 7);
+            // 当選番号をwrapper=AAタグオブジェクトに記載する操作
+            for (let p = 0; p < 6; p++) {
+                wrapper.insertAdjacentHTML('beforeend', String(array02[p]).padStart(2, '0') + ' ');
+            }
+            // ヒット数のカウント
+            for (let i = 0; i < 6; i++) {
+                if (array01.includes(array02[i])) {
+                    count_hit += 1;
+                }
+            }
+            if (array01.includes(array03[0])) {
+                count_hit2 += 1;
+            }
+            // ヒット数による当選判定
+            if (count_hit === 6) {
+                count_money_tousengaku += 200000000 * odds;
+                outcome = "１等賞";
+                count_1prize += 1;
+            } else if (count_hit === 5 && count_hit2 === 1) {
+                count_money_tousengaku += 10000000 * odds;
+                outcome = "２等賞";
+                count_2prize += 1;
+            } else if (count_hit === 5) {
+                count_money_tousengaku += 300000 * odds;
+                outcome = "３等賞";
+                count_3prize += 1;
+            } else if (count_hit === 4) {
+                count_money_tousengaku += 68000 * odds;
+                outcome = "４等賞";
+                count_4prize += 1;
+            } else if (count_hit === 3) {
+                count_money_tousengaku += 1000 * odds;
+                outcome = "５等賞";
+                count_5prize += 1;
+            } else {
+                count_money_tousengaku += 0;
+                outcome = "はずれ";
+                count_6prize += 1;
+            }
+            // ボーナス数字表示
+            wrapper.insertAdjacentHTML('beforeend', ' ボーナス数字: ' + String(array03[0]).padStart(2, '0') + '　当選結果:　' + outcome + '</br>')
+            // outcomeをリセット
+            outcome = "";
+            // 当選金額描写
+            document.getElementById("answer3").textContent = count_money_tousengaku;
+            document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
+            count_money_return = count_money_tousengaku - count_money_toushigaku;
+            document.getElementById("answer_tousengaku").textContent = count_money_return;
+            // 当選判定描写
+            document.getElementById("answer4").textContent = count_1prize;
+            document.getElementById("answer5").textContent = count_2prize;
+            document.getElementById("answer6").textContent = count_3prize;
+            document.getElementById("answer7").textContent = count_4prize;
+            document.getElementById("answer8").textContent = count_5prize;
+            document.getElementById("answer9").textContent = count_6prize;
+            array04_graph.push(count_money_tousengaku);
+            array05_graph.push("");
+        }
+        // グラフ1描写JS
+        if (Line) {
+            Line.destroy();
+        }
+        Line = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: array05_graph,
+                datasets: [
+                    {
+                        label: '儲け額',
+                        data: array04_graph,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // ローカルストレージに直近10データを格納しグラフ２の描写を行う
+        array06_graph.push(Number(document.getElementById("answer3").textContent))
+        let m = array06_graph.length
+        array07_graph = array06_graph.slice(-10)
+        localStorage.setItem("memo", array07_graph);
+
+        if (Line2) {
+            Line2.destroy();
+        }
+        Line2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                datasets: [
+                    {
+                        label: '過去の儲け額の推移',
+                        data: array07_graph,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    }
+                ]
+            },
+        });
+
+    }
+
+    //ボタン１を押したらグラフ２を完全削除
+    function reset_for_button1() {
+        if (Line2) {
+            localStorage.removeItem("memo");
+            array07_graph = [];
+            array06_graph = [];
+            array05_graph = [];
+            array04_graph = [];
+            count_1prize = 0;
+            count_2prize = 0;
+            count_3prize = 0;
+            count_4prize = 0;
+            count_5prize = 0;
+            count_6prize = 0;
+            count_money_tousengaku = 0;
+            count_money_toushigaku = 0;
+            document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
+            document.getElementById("answer_tousengaku").textContent = count_money_tousengaku;
+            count_money_return = count_money_tousengaku - count_money_toushigaku;
+            document.getElementById("answer3").textContent = count_money_return;
+            document.getElementById("answer4").textContent = count_1prize;
+            document.getElementById("answer5").textContent = count_2prize;
+            document.getElementById("answer6").textContent = count_3prize;
+            document.getElementById("answer7").textContent = count_4prize;
+            document.getElementById("answer8").textContent = count_5prize;
+            document.getElementById("answer9").textContent = count_6prize;
+            wrapper.innerHTML = '<p>【当選番号および当選結果】</p>';
+            // Line.destroy();
+            Line2.destroy();
+        }
+    };
+
+    //ボタン２を押したらグラフ１を完全削除
+    function reset_for_button2() {
+        if (Line) {
+            localStorage.removeItem("memo");
+            array07_graph = [];
+            array06_graph = [];
+            array05_graph = [];
+            array04_graph = [];
+            count_1prize = 0;
+            count_2prize = 0;
+            count_3prize = 0;
+            count_4prize = 0;
+            count_5prize = 0;
+            count_6prize = 0;
+            count_money_tousengaku = 0;
+            count_money_toushigaku = 0;
+            document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
+            document.getElementById("answer_tousengaku").textContent = count_money_tousengaku;
+            count_money_return = count_money_tousengaku - count_money_toushigaku;
+            document.getElementById("answer3").textContent = count_money_return;
+            document.getElementById("answer4").textContent = count_1prize;
+            document.getElementById("answer5").textContent = count_2prize;
+            document.getElementById("answer6").textContent = count_3prize;
+            document.getElementById("answer7").textContent = count_4prize;
+            document.getElementById("answer8").textContent = count_5prize;
+            document.getElementById("answer9").textContent = count_6prize;
+            wrapper.innerHTML = '<p>【当選番号および当選結果】</p>';
+            Line.destroy();
+            // Line2.destroy();
+        }
+    };
+
+    // ゲーム⓶は前回のデータを削除しているのでその処理
+    function reset_for_button2_β() {
+        // localStorage.removeItem("memo");
+        // array07_graph = [];
+        // array06_graph = [];
+        array05_graph = [];
+        array04_graph = [];
+        count_1prize = 0;
+        count_2prize = 0;
+        count_3prize = 0;
+        count_4prize = 0;
+        count_5prize = 0;
+        count_6prize = 0;
+        count_money_tousengaku = 0;
+        count_money_toushigaku = 0;
+        document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
+        document.getElementById("answer_tousengaku").textContent = count_money_tousengaku;
+        count_money_return = count_money_tousengaku - count_money_toushigaku;
+        document.getElementById("answer3").textContent = count_money_return;
+        document.getElementById("answer4").textContent = count_1prize;
+        document.getElementById("answer5").textContent = count_2prize;
+        document.getElementById("answer6").textContent = count_3prize;
+        document.getElementById("answer7").textContent = count_4prize;
+        document.getElementById("answer8").textContent = count_5prize;
+        document.getElementById("answer9").textContent = count_6prize;
+        wrapper.innerHTML = '<p>【当選番号および当選結果】</p>';
+        // Line.destroy();
+        // Line2.destroy();
+    };
+
+    //配列２のグラフを削除している
+    function reset2() {
+        if (Line2) {
+            Line2.destroy();
+            Line2 = "";
+        }
+        // localStorage.removeItem("memo");
+        // array07_graph = [];
+        // array06_graph = [];
+    }
+
+    //配列１のグラフを削除
+    function reset1() {
+        if (Line) {
+            Line.destroy();
+            Line = "";
+        }
+    }
