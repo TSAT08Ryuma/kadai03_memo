@@ -60,7 +60,11 @@ function shuffle_check() {
         count_money_toushigaku -= 200 * odds;
         count_money_goukeigaku -= 200 * odds;
         // 重複なしアルゴリズム
-        var arr = [1, 2, 3, 4, 5, 6, 7];
+        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+            21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+            31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+            41, 42, 43
+        ];
         var a = arr.length;
         while (a) {
             var j = Math.floor(Math.random() * a);
@@ -352,58 +356,143 @@ function movie() {
     let movie_1prize = document.getElementById("movie_1prize")
     let movie_2prize = document.getElementById("movie_2prize")
     let movie_3prize = document.getElementById("movie_3prize")
-    let movie_kakuhen = document.getElementById("movie_kakuhen")            
+    let movie_kakuhen = document.getElementById("movie_kakuhen")
     let movieback = document.getElementById("all")
     let probability = Math.floor(Math.random() * 100)
     let movie_prize = ""
 
-    // var videos = [movie_1prize, movie_2prize, movie_3prize, movie_kakuhen];
-    // for (var i = 0; i < videos.length; i++) {
-    // var v = videos[i];
-    // v.pause();
-    // v.currentTime = 0;
-    // v.style.opacity = "0";
-    // v.style.zIndex = "-1";
-    // }
-
     // １等賞
-    if(count_1prize > 0){
-    // 確実に止める
-    movie_prize = movie_1prize
-    movie_prize.pause();
-    movie_prize.currentTime = 0;
-    movie_prize.load();
-    movie_prize.muted = true;
-    movie_prize.play().catch(()=>{});
+    if (count_1prize > 0) {
+        // いったんすべての動画を非表示に
+        var videos = [movie_1prize, movie_2prize, movie_3prize, movie_kakuhen];
+        for (var i = 0; i < videos.length; i++) {
+            var v = videos[i];
+            v.pause();
+            v.currentTime = 0;
+            v.style.display = "none";
+        }
 
-    // 操作させない＆ムービーのオパシティ設定
-    movie.style.pointerEvents = "auto";
-    movie.style.opacity = "1";
-    movie.style.zIndex = "99998";
-    // 透明度を発生／動画はすべて0opacityでIndex99999という設定にCSSでしている
-    movie_prize.style.opacity = "1";
-    movie_prize.style.zIndex = "99999";
-    movieback.style.opacity = "1";
-    movieback.style.zIndex = "99997";
+        // 変数に1等の動画を代入
+        movie_prize = movie_1prize
+        // 1つの動画を再表示
+        movie_prize.style.display = "";
 
-    setTimeout(function () {
-        movie.style.pointerEvents = "none";
-        movie.style.opacity = "0";
-        movie.style.zIndex = "-2"
-        movieback.style.opacity = "0";
-        movieback.style.zIndex = "-3";
-        movie_prize.style.opacity = "0";
+        // 動画が変な動きしないように止めて、0秒にしてロードして稼働
         movie_prize.pause();
         movie_prize.currentTime = 0;
-    }, 5000);
+        movie_prize.load();
+        movie_prize.muted = true;
+        movie_prize.play().catch(() => { });
+
+        // 操作させない＆ムービーのオパシティ設定 ｚIndexは基本0で親要素が負だと親要素ごと沈んでしまう
+        movie.style.pointerEvents = "auto";
+        movie.style.opacity = "1";
+        movie.style.zIndex = "99998";
+        // 透明度を発生／動画はすべて0opacityでIndex99999という設定にCSSでしている
+        movie_prize.style.opacity = "1";
+        movie_prize.style.zIndex = "99999";
+        movieback.style.opacity = "1";
+        movieback.style.zIndex = "99997";
+
+        setTimeout(function () {
+            movie.style.pointerEvents = "none";
+            movie.style.opacity = "0";
+            movie.style.zIndex = "-2"
+            movieback.style.opacity = "0";
+            movieback.style.zIndex = "-3";
+            movie_prize.style.opacity = "0";
+            movie_prize.pause();
+            movie_prize.currentTime = 0;
+        }, 5000);
     }
-    else if(count_1prize === 0 && count_2prize > 0){
+    else if (count_2prize > 0) {
+        // いったんすべての動画を非表示に
+        var videos = [movie_1prize, movie_2prize, movie_3prize, movie_kakuhen];
+        for (var i = 0; i < videos.length; i++) {
+            var v = videos[i];
+            v.pause();
+            v.currentTime = 0;
+            v.style.display = "none";
+        }
+
+        // 変数に2等の動画を代入
+        movie_prize = movie_2prize
+        // 1つの動画を再表示
+        movie_prize.style.display = "";
+
+        // 動画が変な動きしないように止めて、0秒にしてロードして稼働
+        movie_prize.pause();
+        movie_prize.currentTime = 0;
+        movie_prize.load();
+        movie_prize.muted = true;
+        movie_prize.play().catch(() => { });
+
+        // 操作させない＆ムービーのオパシティ設定 ｚIndexは基本0で親要素が負だと親要素ごと沈んでしまう
+        movie.style.pointerEvents = "auto";
+        movie.style.opacity = "1";
+        movie.style.zIndex = "99998";
+        // 透明度を発生／動画はすべて0opacityでIndex99999という設定にCSSでしている
+        movie_prize.style.opacity = "1";
+        movie_prize.style.zIndex = "99999";
+        movieback.style.opacity = "1";
+        movieback.style.zIndex = "99997";
+
+        setTimeout(function () {
+            movie.style.pointerEvents = "none";
+            movie.style.opacity = "0";
+            movie.style.zIndex = "-2"
+            movieback.style.opacity = "0";
+            movieback.style.zIndex = "-3";
+            movie_prize.style.opacity = "0";
+            movie_prize.pause();
+            movie_prize.currentTime = 0;
+        }, 5000);
 
 
+    }
+    else if (count_3prize > 0) {
+        // いったんすべての動画を非表示に
+        var videos = [movie_1prize, movie_2prize, movie_3prize, movie_kakuhen];
+        for (var i = 0; i < videos.length; i++) {
+            var v = videos[i];
+            v.pause();
+            v.currentTime = 0;
+            v.style.display = "none";
+        }
+
+        // 変数に3等の動画を代入
+        movie_prize = movie_3prize
+        // 1つの動画を再表示
+        movie_prize.style.display = "";
+
+        // 動画が変な動きしないように止めて、0秒にしてロードして稼働
+        movie_prize.pause();
+        movie_prize.currentTime = 0;
+        movie_prize.load();
+        movie_prize.muted = true;
+        movie_prize.play().catch(() => { });
+
+        // 操作させない＆ムービーのオパシティ設定 ｚIndexは基本0で親要素が負だと親要素ごと沈んでしまう
+        movie.style.pointerEvents = "auto";
+        movie.style.opacity = "1";
+        movie.style.zIndex = "99998";
+        // 透明度を発生／動画はすべて0opacityでIndex99999という設定にCSSでしている
+        movie_prize.style.opacity = "1";
+        movie_prize.style.zIndex = "99999";
+        movieback.style.opacity = "1";
+        movieback.style.zIndex = "99997";
+
+        setTimeout(function () {
+            movie.style.pointerEvents = "none";
+            movie.style.opacity = "0";
+            movie.style.zIndex = "-2"
+            movieback.style.opacity = "0";
+            movieback.style.zIndex = "-3";
+            movie_prize.style.opacity = "0";
+            movie_prize.pause();
+            movie_prize.currentTime = 0;
+        }, 5000);
     }
 }
 
-// , 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-//             21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-//             31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-//             41, 42, 43
+
