@@ -48,7 +48,7 @@
         <input type="button" id="button0" value="ゲーム⓵"
             onclick="reset_for_button1(); getValue0(); shuffle_check(); reset2()"></button>
         <input type="button" id="button1" value="ゲーム⓶"
-            onclick="reset_for_button2(); reset_for_button2_β(); getValue0(); shuffle_check(); reset1()"></button>
+            onclick="reset_for_button2(); reset_for_button2_β(); getValue0(); shuffle_check(); reset1(); movie()"></button>
         <input type="button" id="button2" value="リセット" onclick="reset_for_button1(); reset_for_button2()"></button>
     </div>
     <!-- 下部の結果発表ゾーン -->
@@ -84,11 +84,13 @@
     <p>copyrights 2025 Game Academy All Rights Reserved.</p>
 </footer>
 
-        <!-- 動画 -->
-        <!-- <div id="movie"> -->
-            <!-- <video src="movie/box.mp4" muted autoplay id="movie2"></video> -->
-            <!-- <video src="movie/prize4.mp4" muted autoplay id="movie3"></video>
-        </div> -->
+    <!-- 動画 -->
+    <div id="movie">
+        <video src="movie/1prize.mp4" muted id="movie_1prize"></video>
+        <!-- <video src="movie/2prize.mp4" muted id="movie_2prize"></video>
+        <video src="movie/3prize.mp4" muted id="movie_3prize"></video>
+        <video src="movie/kakuhen.mp4" muted id="movie_kakuhen"></video> -->
+    </div>
 
 </body>
 

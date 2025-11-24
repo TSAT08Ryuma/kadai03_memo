@@ -60,10 +60,7 @@ function shuffle_check() {
         count_money_toushigaku -= 200 * odds;
         count_money_goukeigaku -= 200 * odds;
         // 重複なしアルゴリズム
-        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-            21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-            31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-            41, 42, 43];
+        var arr = [1, 2, 3, 4, 5, 6, 7];
         var a = arr.length;
         while (a) {
             var j = Math.floor(Math.random() * a);
@@ -351,31 +348,62 @@ Chart.defaults.color = 'white'
 
 // ムービータグ３の映像
 function movie() {
-    const movie = document.getElementById("movie")
-    const movie2 = document.getElementById("movie3")
-    const movieback = document.getElementById("all")
+    let movie = document.getElementById("movie")
+    let movie_1prize = document.getElementById("movie_1prize")
+    let movie_2prize = document.getElementById("movie_2prize")
+    let movie_3prize = document.getElementById("movie_3prize")
+    let movie_kakuhen = document.getElementById("movie_kakuhen")            
+    let movieback = document.getElementById("all")
+    let probability = Math.floor(Math.random() * 100)
+    let movie_prize = ""
 
-    // ４等賞
-    const probability = Math.floor(Math.random() * 100)
-    if(count_4prize > 0){
+    // var videos = [movie_1prize, movie_2prize, movie_3prize, movie_kakuhen];
+    // for (var i = 0; i < videos.length; i++) {
+    // var v = videos[i];
+    // v.pause();
+    // v.currentTime = 0;
+    // v.style.opacity = "0";
+    // v.style.zIndex = "-1";
+    // }
+
+    // １等賞
+    if(count_1prize > 0){
     // 確実に止める
-    movie2.pause();
-    movie2.currentTime = 0;
-    movie2.load();
+    movie_prize = movie_1prize
+    movie_prize.pause();
+    movie_prize.currentTime = 0;
+    movie_prize.load();
+    movie_prize.muted = true;
+    movie_prize.play().catch(()=>{});
 
-    movie.style.opacity = "1";
-    movieback.style.opacity = "1";
-    movieback.style.zIndex = "99998";
+    // 操作させない＆ムービーのオパシティ設定
     movie.style.pointerEvents = "auto";
+    movie.style.opacity = "1";
+    movie.style.zIndex = "99998";
+    // 透明度を発生／動画はすべて0opacityでIndex99999という設定にCSSでしている
+    movie_prize.style.opacity = "1";
+    movie_prize.style.zIndex = "99999";
+    movieback.style.opacity = "1";
+    movieback.style.zIndex = "99997";
+
     setTimeout(function () {
-        movie.style.opacity = "0";
-        movieback.style.opacity = "0";
         movie.style.pointerEvents = "none";
-        movieback.style.zIndex = "-1";
-        movie2.pause();
-        movie2.currentTime = 0;
+        movie.style.opacity = "0";
+        movie.style.zIndex = "-2"
+        movieback.style.opacity = "0";
+        movieback.style.zIndex = "-3";
+        movie_prize.style.opacity = "0";
+        movie_prize.pause();
+        movie_prize.currentTime = 0;
     }, 5000);
     }
-    movie = ""
-    movie2 = ""
+    else if(count_1prize === 0 && count_2prize > 0){
+
+
+    }
 }
+
+// , 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+//             21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+//             31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+//             41, 42, 43
