@@ -12,16 +12,17 @@
     <!-- タイトル部分 -->
     <div class="header">
         <div class="title1">
-            <h1 class="title2">億万長者ゲーム</h1>
+            <h1 class="title2">Make money to spend money</h1>
         </div>
     </div>
     <!-- 上部のルール説明 -->
     <div class="rule">
         <div class="rule1">
             <p class="rule3">【ルール説明】</p>
-            <p>・1～43の整数を入力（重複禁止）</p>
+            <p>・1～43の整数を入力（重複時は当選確率が低下する）</p>
             <p>・1回あたり200ゴールド、ただし掛け金も当選金額もあなた次第でお好みで</p>
             <p>・ゲームボタンを押すたびに、資産は増えるか消えるか</p>
+            <p>・1度始めたら、もう元に戻れない</p>
         </div>
         <div class="rule2">
             <p class="rule3">【賞金】</p>
@@ -34,6 +35,8 @@
     </div>
     <!-- 中部の入力ゾーン -->
     <div class="input1">
+        <!-- <p>あなたの保有ゴールド</p>
+        <input type="number" name="" id="num_asset" min="1" max="1000000000000000" oninput="" value="1000000"> -->
         <p>くじ数字入力ゾーン</p>
         <input type="number" name="" id="num0" min="1" max="43" oninput="limit()" value="1">
         <input type="number" name="" id="num1" min="1" max="43" oninput="limit()" value="2">
