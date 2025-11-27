@@ -526,6 +526,9 @@ function calculation() {
     num_asset = num_asset + count_money_goukeigaku;
     document.getElementById("num_asset").value = num_asset
     document.getElementById("holding_money").textContent = "保有ゴールド： " + Number(document.getElementById("num_asset").value).toLocaleString()
+    if (localStorage.getItem("num_asset") !== null) {
+        document.getElementById("num_asset").disabled = "true"
+        }
     if (num_asset < 0) {
         death_amount = death_amount + 1
         localStorage.setItem("death_amount", death_amount)
@@ -534,7 +537,6 @@ function calculation() {
         alert(array_messeage[Number(localStorage.getItem("death_amount"))])
         if (death_amount > 4) {
             document.getElementById("button_saving").disabled = "true"
-
         }
     }
 }
