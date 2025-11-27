@@ -19,10 +19,10 @@
     <div class="rule">
         <div class="rule1">
             <p class="rule3">【ルール説明】</p>
-            <p>・1～43の整数を入力（重複時は当選確率が低下する）</p>
-            <p>・1回あたり200ゴールド、ただし掛け金も当選金額もあなた次第でお好みで</p>
-            <p>・ゲームボタンを押すたびに、資産は増えるか消えるか</p>
-            <p>・1度始めたら、もう元に戻れない</p>
+            <p>・1～43の整数を入力（重複時は当選確率が低下）</p>
+            <p>・1回あたり200ゴールド、ただし掛け金も当選金額もあなた次第</p>
+            <p></p>
+            <p></p>
         </div>
         <div class="rule2">
             <p class="rule3">【賞金】</p>
@@ -35,8 +35,6 @@
     </div>
     <!-- 中部の入力ゾーン -->
     <div class="input1">
-        <!-- <p>あなたの保有ゴールド</p>
-        <input type="number" name="" id="num_asset" min="1" max="1000000000000000" oninput="" value="1000000"> -->
         <p>くじ数字入力ゾーン</p>
         <input type="number" name="" id="num0" min="1" max="43" oninput="limit()" value="1">
         <input type="number" name="" id="num1" min="1" max="43" oninput="limit()" value="2">
@@ -45,14 +43,19 @@
         <input type="number" name="" id="num4" min="1" max="43" oninput="limit()" value="5">
         <input type="number" name="" id="num5" min="1" max="43" oninput="limit()" value="6">
         <p>くじ引きの回数 1-10000回</p>
-        <input type="number" name="" value="100" id="num6" min="1" max="100">
+        <input type="number" name="" value="50" id="num6" min="1" max="100", oninput="kake_amount_calculation()">
         <p>掛け金と当選額 1-10000倍</p>
-        <input type="number" name="" value="10000" id="num7" min="1" max="10000">
+        <input type="number" name="" value="100" id="num7" min="1" max="10000">
         <input type="button" id="button0" value="ゲーム⓵"
             onclick="reset_for_button1(); getValue0(); shuffle_check(); reset2()"></button>
         <input type="button" id="button1" value="ゲーム⓶"
             onclick="reset_for_button2(); reset_for_button2_β(); getValue0(); shuffle_check(); reset1(); movie()"></button>
         <input type="button" id="button2" value="リセット" onclick="reset_for_button1(); reset_for_button2()"></button>
+        <span id="kake_amount">1クリック：</span>
+        <p><span id="holding_money">保有ゴールド：</span><span id="comment"></span></p>
+        <input type="number" name="" id="num_asset" min="1" max="1000000000000000" oninput="holding_money()" value="1000000">
+        <input type="button" id="button_saving" value="ゲーム⓷"
+            onclick="save(); reset_for_button2(); reset_for_button2_β(); getValue0(); shuffle_check(); reset1(); movie(); calculation()"></button>
     </div>
     <!-- 下部の結果発表ゾーン -->
     <div>

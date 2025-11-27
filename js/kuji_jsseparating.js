@@ -1,3 +1,4 @@
+let num_asset = Number(document.getElementById("num_asset").value); //資産額を確認し続ける
 let array07_graph = []; //グラフ2を書くために10の数字を格納する配列
 let array06_graph = []; //グラフ2を書くために数字を格納する配列
 let array05_graph = []; //グラフ1を作るための横軸用の空列
@@ -7,6 +8,7 @@ let array02 = []; //array02は43の配列のうち0-5番目のボーナス数字
 let array01 = []; //array01は入力した値を取得する配列
 let count_hit = 0; //count_hitは通常数字のヒットを判定
 let count_hit2 = 0; //count_hit2はボーナス数字のヒットを判定
+let kake_amount //賭け金総額
 let count_money_toushigaku = 0;
 let count_money_goukeigaku = 0;
 let count_money_tousengaku = 0; //count_money_tousengaku = count_money_goukeigaku - count_money_toushigaku
@@ -123,10 +125,10 @@ function shuffle_check() {
         // outcomeをリセット
         outcome = "";
         // 当選金額描写
-        document.getElementById("answer_goukeigaku").textContent = count_money_goukeigaku;
-        document.getElementById("answer_toushigaku").textContent = count_money_toushigaku;
+        document.getElementById("answer_goukeigaku").textContent = count_money_goukeigaku.toLocaleString();
+        document.getElementById("answer_toushigaku").textContent = count_money_toushigaku.toLocaleString();
         count_money_tousengaku = count_money_goukeigaku - count_money_toushigaku;
-        document.getElementById("answer_tousengaku").textContent = count_money_tousengaku;
+        document.getElementById("answer_tousengaku").textContent = count_money_tousengaku.toLocaleString();
         // 当選判定描写
         document.getElementById("answer4").textContent = count_1prize;
         document.getElementById("answer5").textContent = count_2prize;
@@ -169,9 +171,8 @@ function shuffle_check() {
     });
 
     // ローカルストレージに直近10データを格納
-    array06_graph.push(Number(document.getElementById("answer_goukeigaku").textContent))
-    // let m = array06_graph.length
-    array07_graph = array06_graph.slice(-10)
+    array06_graph.push(Number(document.getElementById("answer_goukeigaku").textContent.replaceAll(",","")));
+    array07_graph = array06_graph.slice(-10);
     localStorage.setItem("memo", array07_graph);
 
     // グラフ2を描写
@@ -268,9 +269,6 @@ function reset_for_button2() {
 
 // ゲーム⓶は前回のデータを削除しているのでその処理
 function reset_for_button2_β() {
-    // localStorage.removeItem("memo");
-    // array07_graph = [];
-    // array06_graph = [];
     array05_graph = [];
     array04_graph = [];
     count_1prize = 0;
@@ -358,7 +356,6 @@ function movie() {
     let movie_3prize = document.getElementById("movie_3prize")
     let movie_kakuhen = document.getElementById("movie_kakuhen")
     let movieback = document.getElementById("all")
-    let probability = Math.floor(Math.random() * 100)
     let movie_prize = ""
 
     // １等賞
@@ -493,6 +490,42 @@ function movie() {
             movie_prize.currentTime = 0;
         }, 5000);
     }
+}
+
+// 資産額を入力できなくするか判定する
+if(localStorage.getItem("num_asset") !== null){
+    document.getElementById("num_asset").disabled = "true"
+    }
+// 初回の画面に保有資産額を表示する
+    document.getElementById("holding_money").textContent = "保有ゴールド： " + Number(document.getElementById("num_asset").value).toLocaleString()
+kake_amount = document.getElementById("num6").value * document.getElementById("num7").value * 200
+document.getElementById("kake_amount").textContent = "1クリック: " + kake_amount.toLocaleString()
+
+// 画面に保有資産額を表示する
+    function holding_money(){
+    document.getElementById("holding_money").textContent = "保有ゴールド： " + Number(document.getElementById("num_asset").value).toLocaleString()
+}
+
+// 賭け総額を出すよ
+function kake_amount_calculation(){
+kake_amount = document.getElementById("num6").value * document.getElementById("num7").value * 200
+document.getElementById("kake_amount").textContent = "1クリック: " + kake_amount.toLocaleString()
+}
+
+// ボタンを押したらブラウザにデータが飛ぶ
+function save(){
+    localStorage.setItem("num_asset", Number(num_asset));
+}
+
+// ボタンを押したら保有資産額に結果を足して表示する
+function calculation(){
+    num_asset = num_asset + count_money_goukeigaku;
+    document.getElementById("num_asset").value = num_asset
+    document.getElementById("holding_money").textContent = "保有ゴールド： " + Number(document.getElementById("num_asset").value).toLocaleString()
+    // if(num_asset < 0){
+    //     death_count = death_count + 1
+    //     localStorage.setItem("death_count,")
+    // }
 }
 
 
