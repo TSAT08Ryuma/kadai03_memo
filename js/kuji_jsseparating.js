@@ -172,7 +172,7 @@ function shuffle_check() {
     });
 
     // ローカルストレージに直近10データを格納
-    array06_graph.push(Number(document.getElementById("answer_goukeigaku").textContent.replaceAll(",","")));
+    array06_graph.push(Number(document.getElementById("answer_goukeigaku").textContent.replaceAll(",", "")));
     array07_graph = array06_graph.slice(-10);
     localStorage.setItem("memo", array07_graph);
 
@@ -494,44 +494,47 @@ function movie() {
 }
 
 // 資産額を入力できなくするか判定する
-if(localStorage.getItem("num_asset") !== null){
+if (localStorage.getItem("num_asset") !== null) {
     document.getElementById("num_asset").disabled = "true"
-    }
+}
 // 初回の画面に保有資産額を表示する
-    document.getElementById("holding_money").textContent = "保有ゴールド： " + Number(document.getElementById("num_asset").value).toLocaleString()
+document.getElementById("holding_money").textContent = "保有ゴールド： " + Number(document.getElementById("num_asset").value).toLocaleString()
 kake_amount = document.getElementById("num6").value * document.getElementById("num7").value * 200
 document.getElementById("kake_amount").textContent = "1クリック: " + kake_amount.toLocaleString()
+if (Number(localStorage.getItem("death_amount")) > 4) {
+            document.getElementById("button_saving").disabled = "true"
+        }
 
 // 画面に保有資産額を表示する
-    function holding_money(){
+function holding_money() {
     document.getElementById("holding_money").textContent = "保有ゴールド： " + Number(document.getElementById("num_asset").value).toLocaleString()
 }
 
 // 賭け総額を出すよ
-function kake_amount_calculation(){
-kake_amount = document.getElementById("num6").value * document.getElementById("num7").value * 200
-document.getElementById("kake_amount").textContent = "1クリック: " + kake_amount.toLocaleString()
+function kake_amount_calculation() {
+    kake_amount = document.getElementById("num6").value * document.getElementById("num7").value * 200
+    document.getElementById("kake_amount").textContent = "1クリック: " + kake_amount.toLocaleString()
 }
 
 // ボタンを押したらブラウザにデータが飛ぶ
-function save(){
+function save() {
     localStorage.setItem("num_asset", Number(num_asset));
 }
 
 // ボタンを押したら保有資産額に結果を足して表示する
-function calculation(){
+function calculation() {
     num_asset = num_asset + count_money_goukeigaku;
     document.getElementById("num_asset").value = num_asset
     document.getElementById("holding_money").textContent = "保有ゴールド： " + Number(document.getElementById("num_asset").value).toLocaleString()
-    if(num_asset < 0){
+    if (num_asset < 0) {
         death_amount = death_amount + 1
         localStorage.setItem("death_amount", death_amount)
-        const array_messeage=
-        ["","借金開始あと４回","借金あと３回","借金あと２回","借金あと１回","Game Over"]
+        const array_messeage =
+            ["", "借金開始あと４回", "借金あと３回", "借金あと２回", "借金あと１回", "Game Over"]
         alert(array_messeage[Number(localStorage.getItem("death_amount"))])
-        if(death_amount>4){
+        if (death_amount > 4) {
             document.getElementById("button_saving").disabled = "true"
-            
+
         }
     }
 }
